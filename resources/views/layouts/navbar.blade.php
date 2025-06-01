@@ -1,38 +1,43 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
-    <div class="container">
-        <a class="navbar-brand" href="{{ route('dashboard') }}">Peminjaman Alat</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('barang.index') ? 'active' : '' }}" href="{{ route('barang.index') }}">Daftar Alat</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('peminjaman.index') ? 'active' : '' }}" href="{{ route('peminjaman') }}">Peminjaman</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('perbaikan.index') ? 'active' : '' }}" href="{{ route('perbaikan.index') }}">Perbaikan</a>
-                </li>
-            </ul>
-
-            <!-- Tambahkan logout form di kanan -->
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link nav-link" style="display:inline; padding:0; border:none; background:none;">
-                            Logout
-                        </button>
-                    </form>
-                </li>
-            </ul>
-        </div>
+<nav class="sidebar bg-fresh text-dark d-flex flex-column p-3 shadow-sm">
+    <div class="sidebar-brand mb-4 d-flex align-items-center">
+        <!-- Gambar Logo UNIB -->
+        <img src="{{ asset('images/unib.png') }}" alt="Logo UNIB" width="35" class="me-2">
+        
+        <!-- Teks nama sistem -->
+        <span class="fw-bold fs-6 text-primary">
+            Peminjaman Alat Laboratorium
+        </span>
     </div>
+
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li>
+            <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('barang.index') }}" class="nav-link {{ request()->routeIs('barang.*') ? 'active' : '' }}">
+                <i class="bi bi-tools me-2"></i> Daftar Alat
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('peminjaman') }}" class="nav-link {{ request()->routeIs('peminjaman.*') ? 'active' : '' }}">
+                <i class="bi bi-clipboard-check me-2"></i> Peminjaman
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('perbaikan.index') }}" class="nav-link {{ request()->routeIs('perbaikan.*') ? 'active' : '' }}">
+                <i class="bi bi-wrench me-2"></i> Perbaikan
+            </a>
+        </li>
+
+        <li class="mt-3">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center">
+                    <i class="bi bi-box-arrow-right me-2"></i> Logout
+                </button>
+            </form>
+        </li>
+    </ul>
 </nav>

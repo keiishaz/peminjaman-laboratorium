@@ -3,92 +3,54 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <h1 class="mb-4">Dashboard</h1>
+<div class="container py-4">
 
-    <div class="row">
-        <!-- Profil Akun -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">Profil Akun</div>
-                <div class="card-body">
-                    <p><strong>Nama:</strong> {{ $user->nama_lengkap ?? $user->name }}</p>
-                    <p><strong>Email:</strong> {{ $user->email }}</p>
-                    <p><strong>Role:</strong> {{ ucfirst($user->role ?? 'Petugas') }}</p>
-                    <a href="{{ route('profile') }}" class="btn btn-outline-primary btn-sm">Edit Profil</a>
+    <!-- Profil -->
+    <div class="d-flex align-items-center justify-content-between mb-4 p-3 rounded shadow-sm bg-white">
+        <div>
+            <h4 class="mb-0">Halo, {{ $user->nama_lengkap ?? $user->name }}!</h4>
+            <small class="text-muted">{{ $user->email }}</small>
+        </div>
+    </div>
+
+    <!-- Kartu Statistik -->
+    <div class="row g-3 mb-4">
+        @php $cardHeight = 180; @endphp
+
+        <div class="col-md-4 d-flex">
+            <div class="card text-center shadow-sm flex-fill" style="height: {{ $cardHeight }}px;">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <i class="bi bi-hdd-stack fs-1 text-primary mb-3"></i>
+                    <h5>Total Alat</h5>
+                    <h2>{{ $totalBarangs }}</h2>
                 </div>
             </div>
         </div>
 
-        <!-- Statistik -->
-        <div class="col-md-8 mb-4">
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <div class="card text-center shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Total Alat</h5>
-                            <p class="display-6">{{ $totalBarangs }}</p>
-                        </div>
-                    </div>
+        <div class="col-md-4 d-flex">
+            <div class="card text-center shadow-sm flex-fill" style="height: {{ $cardHeight }}px;">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <i class="bi bi-box-arrow-in-right fs-1 text-success mb-3"></i>
+                    <h5>Peminjaman Aktif</h5>
+                    <h2>{{ $totalPeminjamanAktif }}</h2>
                 </div>
-                <div class="col-md-4">
-                    <div class="card text-center shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Peminjaman Aktif</h5>
-                            <p class="display-6">{{ $totalPeminjamanAktif }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card text-center shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Perbaikan Berjalan</h5>
-                            <p class="display-6">{{ $totalPerbaikanBerjalan }}</p>
-                        </div>
-                    </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 d-flex">
+            <div class="card text-center shadow-sm flex-fill" style="height: {{ $cardHeight }}px;">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <i class="bi bi-tools fs-1 text-warning mb-3"></i>
+                    <h5>Perbaikan Berjalan</h5>
+                    <h2>{{ $totalPerbaikanBerjalan }}</h2>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Grafik -->
-    <div class="row">
-        <div class="col-12 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-header bg-secondary text-white">Statistik Peminjaman Bulanan</div>
-                <div class="card-body">
-                    <canvas id="peminjamanChart" height="100"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 @endsection
 
-@section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('peminjamanChart').getContext('2d');
-        const peminjamanChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: {!! json_encode($bulan) !!},
-                datasets: [{
-                    label: 'Jumlah Peminjaman',
-                    data: {!! json_encode($dataPeminjaman) !!},
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 2,
-                    tension: 0.3,
-                    fill: true
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        precision: 0
-                    }
-                }
-            }
-        });
-    </script>
-@endsection
+@push('scripts')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+@endpush

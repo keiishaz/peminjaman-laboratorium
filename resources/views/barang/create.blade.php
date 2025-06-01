@@ -2,57 +2,37 @@
 @section('title', 'Tambah Alat')
 
 @section('content')
-    <h1 class="mb-3">Tambah Alat</h1>
+<div class="card p-4 shadow-sm bg-white rounded">
+    <h2 class="text-primary mb-4">Tambah Alat</h2>
 
-<form action="{{ route('peminjaman.store') }}" method="POST">
-    @csrf
-    <div class="mb-3">
-        <label>Nama Peminjam</label>
-        <input type="text" name="nama_peminjam" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label>NPM</label>
-        <input type="text" name="npm" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label>Barang</label>
-        <select name="barang_id" class="form-control" required>
-            <option value="">-- Pilih Barang --</option>
-            @foreach ($barangs as $barang)
-                <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
-            @endforeach
-        </select>
-    </div>
-    <div class="mb-3">
-        <label>Petugas</label>
-        <select name="petugas_id" class="form-control" required>
-            <option value="">-- Pilih Petugas --</option>
-            @foreach ($petugas as $p)
-                <option value="{{ $p->id }}">{{ $p->nama }}</option>
-            @endforeach
-        </select>
-    </div>
-    <div class="mb-3">
-        <label>Tanggal Pinjam</label>
-        <input type="date" name="tanggal_pinjam" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label>Tanggal Kembali</label>
-        <input type="date" name="tanggal_kembali" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label>Status</label>
-        <select name="status" class="form-control">
-            <option value="Dipinjam" selected>Dipinjam</option>
-            <option value="Dikembalikan">Dikembalikan</option>
-            <option value="Terlambat">Terlambat</option>
-        </select>
-    </div>
-    <div class="mb-3">
-        <label>Catatan</label>
-        <textarea name="catatan" class="form-control"></textarea>
-    </div>
-    <button class="btn btn-primary">Simpan</button>
-</form>
+    <form action="{{ route('barang.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
 
+        <div class="mb-3">
+            <label for="nama_barang" class="form-label">Nama Barang</label>
+            <input type="text" class="form-control" name="nama_barang" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="spesifikasi" class="form-label">Spesifikasi</label>
+            <textarea class="form-control" name="spesifikasi" rows="3" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="stok" class="form-label">Stok</label>
+            <input type="number" class="form-control" name="stok" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="kondisi" class="form-label">Kondisi</label>
+            <select class="form-select" name="kondisi" required>
+                <option value="Baik">Baik</option>
+                <option value="Rusak">Rusak</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <a href="{{ route('barang.index') }}" class="btn btn-secondary">Batal</a>
+    </form>
+</div>
 @endsection

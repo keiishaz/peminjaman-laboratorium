@@ -22,7 +22,8 @@ class Peminjaman extends Model
         'tanggal_kembali',
         'tanggal_dikembalikan',
         'status',
-        'catatan'
+        'catatan',
+        'jumlah'
     ];
 
     public function barang()

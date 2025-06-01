@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('petugas_id')->constrained('petugas');
             $table->string('nama_peminjam');
             $table->string('npm');
+            $table->integer('jumlah');
             $table->date('tanggal_pinjam');
             $table->date('tanggal_kembali');
             $table->date('tanggal_dikembalikan')->nullable();

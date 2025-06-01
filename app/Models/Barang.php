@@ -16,7 +16,6 @@ class Barang extends Model
         'spesifikasi',
         'stok',
         'kondisi',
-        'gambar'
     ];
 
     public function peminjaman()

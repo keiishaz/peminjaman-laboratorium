@@ -18,6 +18,7 @@ class PeminjamanSeeder extends Seeder
             'petugas_id' => 1,
             'nama_peminjam' => 'Andini Istiqomah',
             'npm' => 'G1F023016',
+            'jumlah' => 1,
             'tanggal_pinjam' => '2025-05-30',
             'tanggal_kembali' => '2025-06-03',
             'tanggal_dikembalikan' => null,

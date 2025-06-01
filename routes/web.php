@@ -20,13 +20,13 @@ use App\Http\Controllers\PeminjamanController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
-
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
-Route::post('/login', [AuthController::class, 'login'])->name('login.process');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.process');
+});
 
 Route::middleware('auth:petugas')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -42,7 +42,7 @@ Route::middleware('auth:petugas')->group(function () {
     Route::get('/peminjaman/tambah', [PeminjamanController::class, 'create'])->name('peminjaman.create');
     Route::post('/peminjaman/simpan', [PeminjamanController::class, 'store'])->name('peminjaman.store');
     Route::get('/peminjaman/{id}/edit', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
-    Route::post('/peminjaman/{id}/update', [PeminjamanController::class, 'update'])->name('peminjaman.update');
+    Route::put('/peminjaman/{id}/update', [PeminjamanController::class, 'update'])->name('peminjaman.update');
     Route::delete('/peminjaman/{id}/hapus', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
 
     Route::get('/perbaikan', [PerbaikanController::class, 'index'])->name('perbaikan.index');
@@ -51,9 +51,6 @@ Route::middleware('auth:petugas')->group(function () {
     Route::get('/perbaikan/{id}/edit', [PerbaikanController::class, 'edit'])->name('perbaikan.edit');
     Route::put('/perbaikan/{id}', [PerbaikanController::class, 'update'])->name('perbaikan.update');
     Route::delete('/perbaikan/{id}', [PerbaikanController::class, 'destroy'])->name('perbaikan.destroy');
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
-    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

@@ -2,9 +2,10 @@
 @section('title', 'Tambah Peminjaman')
 
 @section('content')
-    <h1 class="mb-3">Tambah Peminjaman</h1>
+<div class="card p-4 shadow-sm bg-white rounded">
+    <h2 class="text-primary mb-4">Tambah Peminjaman</h2>
 
-    <form action="{{ route('peminjaman.store') }}" method="POST">
+    <form action="{{ route('peminjaman.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
@@ -15,6 +16,11 @@
                     <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
                 @endforeach
             </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="jumlah" class="form-label">Jumlah</label>
+            <input type="number" name="jumlah" id="jumlah" class="form-control" required>
         </div>
 
         <div class="mb-3">
@@ -53,5 +59,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Simpan Peminjaman</button>
+        <a href="{{ route('peminjaman') }}" class="btn btn-secondary ms-2">Batal</a>
     </form>
+</div>
 @endsection
