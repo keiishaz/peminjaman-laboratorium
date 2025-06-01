@@ -35,7 +35,7 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center">
-                    <i class="bi bi-box-arrow-right me-2"></i> Logout
+                    <i class="bi bi-box-arrow-right me-2"></i> Keluar
                 </button>
             </form>
         </li>

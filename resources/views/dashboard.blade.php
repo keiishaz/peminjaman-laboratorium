@@ -9,7 +9,8 @@
     <div class="d-flex align-items-center justify-content-between mb-4 p-3 rounded shadow-sm bg-white">
         <div>
             <h4 class="mb-0">Halo, {{ $user->nama_lengkap ?? $user->name }}!</h4>
-            <small class="text-muted">{{ $user->email }}</small>
+            <small class="text-muted">{{ $user->email }}</small> <br>
+            <small class="text-muted">{{ $user->nomor_telepon }}</small>
         </div>
     </div>
 

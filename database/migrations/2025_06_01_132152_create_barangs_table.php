@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_barang');
             $table->text('spesifikasi')->nullable();
             $table->integer('stok')->default(1);
-            $table->enum('kondisi', ['Baik', 'Rusak', 'Habis'])->default('Baik');
+            $table->enum('kondisi', ['Baik', 'Rusak'])->default('Baik');
             $table->timestamps();
         });
     }
