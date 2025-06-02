@@ -37,19 +37,15 @@ class PeminjamanController extends Controller
         'jumlah' => 'required|integer|min:1',
     ]);
 
-    // Ambil barang
     $barang = Barang::findOrFail($request->barang_id);
 
-    // Cek stok cukup
     if ($barang->stok < $request->jumlah) {
         return back()->withErrors(['stok' => 'Stok barang tidak cukup']);
     }
 
-    // Kurangi stok barang
     $barang->stok -= $request->jumlah;
     $barang->save();
 
-    // Simpan data peminjaman
     $data = $request->all();
     Peminjaman::create($data);
 
@@ -82,15 +78,11 @@ class PeminjamanController extends Controller
     $peminjaman = Peminjaman::findOrFail($id);
     $barang = Barang::findOrFail($request->barang_id);
 
-    // Jika status sebelumnya bukan 'Dikembalikan' dan sekarang diupdate jadi 'Dikembalikan'
     if ($peminjaman->status != 'Dikembalikan' && $request->status == 'Dikembalikan') {
-        // Tambah stok barang kembali
         $barang->stok += $peminjaman->jumlah;
         $barang->save();
     }
 
-    // Jika status sebelumnya 'Dikembalikan' dan sekarang diubah jadi bukan 'Dikembalikan'
-    // (Misal user salah update, kita kembalikan stoknya lagi ke dikurangi)
     if ($peminjaman->status == 'Dikembalikan' && $request->status != 'Dikembalikan') {
         if ($barang->stok < $peminjaman->jumlah) {
             return back()->withErrors(['stok' => 'Stok barang tidak cukup untuk mengubah status']);

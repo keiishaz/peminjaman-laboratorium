@@ -13,7 +13,6 @@
     @endif
 
     <input type="text" id="searchInput" placeholder="Cari nama, spesifikasi, stok, atau kondisi..." class="form-control mb-3" />
-
     <table class="table table-bordered">
         <thead>
             <tr>

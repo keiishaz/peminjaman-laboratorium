@@ -33,9 +33,7 @@ class PerbaikanController extends Controller
             'status' => 'in:Dilaporkan,Dalam Perbaikan,Selesai',
             'tindakan' => 'nullable|string',
         ]);
-
         Perbaikan::create($request->all());
-
         return redirect()->route('perbaikan.index')->with('success', 'Data perbaikan berhasil ditambahkan');
     }
 
@@ -57,10 +55,8 @@ class PerbaikanController extends Controller
             'status' => 'in:Dilaporkan,Dalam Perbaikan,Selesai',
             'tindakan' => 'nullable|string',
         ]);
-
         $perbaikan = Perbaikan::findOrFail($id);
         $perbaikan->update($request->all());
-
         return redirect()->route('perbaikan.index')->with('success', 'Data perbaikan berhasil diperbarui');
     }
 
@@ -68,7 +64,6 @@ class PerbaikanController extends Controller
     {
         $perbaikan = Perbaikan::findOrFail($id);
         $perbaikan->delete();
-
         return redirect()->route('perbaikan.index')->with('success', 'Data perbaikan berhasil dihapus');
     }
 }

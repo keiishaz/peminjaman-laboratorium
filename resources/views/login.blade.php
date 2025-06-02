@@ -53,9 +53,7 @@
              alt="Ilustrasi Pemeliharaan"
              class="w-full h-full object-cover max-h-[600px]" />
       </div>
-
     </div>
   </div>
-
 </body>
 </html>

@@ -57,7 +57,6 @@
         const rows = document.querySelectorAll('table tbody tr');
 
         rows.forEach(row => {
-            // Kolom yang dicari: Alat (0), Petugas (1), Kerusakan (3), Status (4), Tindakan (5)
             const alat = row.cells[0].textContent.toLowerCase();
             const petugas = row.cells[1].textContent.toLowerCase();
             const kerusakan = row.cells[3].textContent.toLowerCase();
